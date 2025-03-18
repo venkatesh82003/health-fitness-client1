@@ -24,7 +24,6 @@ function App() {
   return (
     <div className="App1">
       <BrowserRouter>
-        {/* Navbar with better Bootstrap styling */}
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
           <div className="container-fluid">
             <Link className="navbar-brand fw-bold text-uppercase" to="#">
@@ -44,7 +43,6 @@ function App() {
                     <Link className="nav-link text-light fw-bold" to="/TrackCalories">Track Calories</Link>
                     <Link className="nav-link text-light fw-bold" to="/ViewFitnessTrends">View Fitness Trends</Link>
 
-                    {/* Logout button with icon */}
                     <button className="btn btn-danger ms-3 d-flex align-items-center" onClick={logout}>
                       <FaSignOutAlt className="me-2" /> Logout 
                     </button>

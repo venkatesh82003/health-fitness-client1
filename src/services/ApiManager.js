@@ -2,9 +2,9 @@ class ApiManager{
     static GetApiCall=async (url)=>{
         return await fetch(url,{
           method:'GET',
-        //   headers:{
-        //     'Authorization':`Bearer ${localStorage.getItem('authtoken')}`
-        //   }
+          headers:{
+            'Authorization':`Bearer ${localStorage.getItem('authtoken')}`
+          }
         });
     };
     static PostApiCall=async (url,b)=>{
@@ -12,7 +12,7 @@ class ApiManager{
             method:'POST',
             headers:{
                 'Content-Type': 'application/json',
-                //'Authorization':`Bearer ${localStorage.getItem('authtoken')}`,
+                'Authorization':`Bearer ${localStorage.getItem('authtoken')}`,
             },
             body:JSON.stringify(b)
         });
@@ -22,7 +22,7 @@ class ApiManager{
             method:'PUT',
             headers:{
                 'Content-Type': 'application/json',
-               // 'Authorization':`Bearer ${localStorage.getItem('authtoken')}`,
+                'Authorization':`Bearer ${localStorage.getItem('authtoken')}`,
             },
             body:JSON.stringify(b)
         });
@@ -30,9 +30,9 @@ class ApiManager{
     static DeleteApiCall=async (url)=>{
         return await fetch(url,{
             method:'DELETE',
-            // headers:{
-            //     'Authorization':`Bearer ${localStorage.getItem('authtoken')}`
-            // }
+            headers:{
+                'Authorization':`Bearer ${localStorage.getItem('authtoken')}`
+            }
         });
     }
 }

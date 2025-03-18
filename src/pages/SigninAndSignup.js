@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { ApiManager } from "../services/ApiManager";
 import * as Yup from "yup";
-import { FaUser, FaLock, FaEnvelope, FaPhone, FaVenusMars } from "react-icons/fa"; // Icons for inputs
+import { FaUser, FaLock, FaEnvelope, FaPhone, FaVenusMars } from "react-icons/fa";
 
 function SigninAndSignup({ login }) {
   const [activeTab, setActiveTab] = useState("signin");
@@ -22,11 +22,11 @@ function SigninAndSignup({ login }) {
     }),
     onSubmit: async (values,{setSubmitting}) => {
       try {
-        const response = await fetch("http://localhost:5090/api/Login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ Email: values.signInEmail, PasswordHash: values.signInPassword }),
-        });
+        const auth={
+          Email: values.signInEmail,
+          PasswordHash: values.signInPassword
+        }
+        const response = await ApiManager.PostApiCall("http://localhost:5090/api/Login", auth);
 
         if (!response.ok) {
           setErrorMsg("Invalid credentials");
@@ -36,6 +36,7 @@ function SigninAndSignup({ login }) {
           const res=await ApiManager.GetApiCall(`http://localhost:5090/api/Users/${values.signInEmail}`);
           const user=await res.json();
           localStorage.setItem("uid",user.id);
+          localStorage.setItem("uname",user.fullName);
           login();
           navigate("/Dashboard");
         }
@@ -71,11 +72,7 @@ function SigninAndSignup({ login }) {
     }),
     onSubmit: async (values,{setSubmitting}) => {
       try {
-        const response = await fetch("http://localhost:5090/api/Users", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        });
+        const response = await ApiManager.PostApiCall("http://localhost:5090/api/Users", values);
 
         if (!response.ok) {
           setErrorMsg("Registration failed.");
@@ -174,7 +171,7 @@ function SigninAndSignup({ login }) {
               {formikSignUp.touched.confirmPassword && formikSignUp.errors.confirmPassword ? (<div className="text-danger">{formikSignUp.errors.confirmPassword}</div>) : null}
             </div>
             <button type="submit" className="btn btn-primary" disabled={formikSignUp.isSubmitting}>
-            {formikSignUp.isSubmitting ? "Signing Up..." : "Sign Up"}
+            {formikSignUp.isSubmitting ? "Register..." : "Register"}
           </button>
           </form>
         )}

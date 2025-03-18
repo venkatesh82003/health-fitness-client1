@@ -1,6 +1,7 @@
 import React ,{useState} from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import {ApiManager} from '../services/ApiManager';
 
 const LogWorkout = () => {
   const [uid,setUid]=useState(localStorage.getItem('uid'));
@@ -34,14 +35,7 @@ const LogWorkout = () => {
           WorkoutDate:values.date
       }
       try {
-        const response = await fetch("http://localhost:5090/api/LogWorkout", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(workout),
-        });
-
+        const response = await ApiManager.PostApiCall("http://localhost:5090/api/LogWorkout", workout);
         if (response.ok) {
           setSubmitting(false);
           resetForm();
