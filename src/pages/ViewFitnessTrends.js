@@ -36,9 +36,10 @@ function ViewFitnessTrends(){
             <div className="card p-3 mb-4 shadow-sm">
                 <h4>Calories Intake</h4>
                 <table className="table table-bordered">
-                    <thead>
+                    <thead className="table-dark">
                         <tr>
                         <th>Date</th>
+                        <th>Food Item</th>
                         <th>Calories Consumed</th>
                         </tr>
                     </thead>
@@ -57,7 +58,7 @@ function ViewFitnessTrends(){
             <div className="card p-3 shadow-sm">
                 <h4>Workout Log</h4>
                 <table className="table table-bordered">
-                    <thead>
+                    <thead className="table-dark">
                         <tr>
                         <th>Date</th>
                         <th>Workout Type</th>
